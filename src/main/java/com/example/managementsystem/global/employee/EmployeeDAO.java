@@ -1,7 +1,7 @@
 package com.example.managementsystem.global.employee;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -11,35 +11,26 @@ import java.util.List;
 public class EmployeeDAO
 {
     private final DataSource dataSource;
+    private final EmployeeMapper employeeMapper;
     
-    public EmployeeDAO(DataSource dataSource) {
+    @Autowired
+    public EmployeeDAO(DataSource dataSource, EmployeeMapper employeeMapper) {
         this.dataSource = dataSource;
+        this.employeeMapper = employeeMapper;
     }
     
     public JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(dataSource);
     }
     
-    private RowMapper<EmployeeDTO> rowMapper = (rs, rowNum) -> {
-        EmployeeDTO employee = new EmployeeDTO();
-        employee.setEmployeeId(rs.getInt("employeeId"));
-        employee.setName(rs.getString("name"));
-        employee.setHireDate(rs.getDate("hireDate"));
-        employee.setSalary(rs.getFloat("salary"));
-        employee.setAverageWage(rs.getFloat("averageWage"));
-        employee.setAnnualAllowance(rs.getFloat("annualAllowance"));
-        employee.setBonus(rs.getFloat("bonus"));
-        return employee;
-    };
-    
     public EmployeeDTO getEmployeeById(int id) {
         String sql = "SELECT * FROM employee WHERE employeeId = ?";
-        return getJdbcTemplate().queryForObject(sql, new Object[]{id}, rowMapper);
+        return getJdbcTemplate().queryForObject(sql, new Object[]{id}, employeeMapper);
     }
     
     public List<EmployeeDTO> getAllEmployees() {
         String sql = "SELECT * FROM employee";
-        return getJdbcTemplate().query(sql, rowMapper);
+        return getJdbcTemplate().query(sql, employeeMapper);
     }
     
     public int insertEmployee(EmployeeDTO employee) {
