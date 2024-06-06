@@ -1,5 +1,7 @@
-package com.example.managementsystem.salary.dto;
+package com.example.managementsystem.salary.retirement_fund;
 
+import com.example.managementsystem.global.employee.EmployeeDTO;
+import com.example.managementsystem.salary.period.PeriodDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

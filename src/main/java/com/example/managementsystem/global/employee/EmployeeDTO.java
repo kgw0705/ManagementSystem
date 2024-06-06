@@ -1,4 +1,4 @@
-package com.example.managementsystem.salary.dto;
+package com.example.managementsystem.global.employee;
 
 import lombok.Getter;
 import lombok.Setter;
