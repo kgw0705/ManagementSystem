@@ -4,37 +4,29 @@ import com.example.managementsystem.global.entity.Employee;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@ToString
+@Table(name = "work_experience")
 public class WorkExperience
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int workExperienceId;
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
     private String classification;
-    @ElementCollection
-    private List<String> appointment;
-    @ElementCollection
-    private List<String> education;
+    private String appointment;
+    private String education;
     private String work;
     private String rating;
     private String seniority;
-    @ElementCollection
-    private List<String> positionExperience;
+    private String positionExperience;
     private String trainingCourses;
-    @ElementCollection
-    private List<String> certificate;
-    @ElementCollection
-    private List<String> prize;
-    @ElementCollection
-    private List<String> punishment;
+    private String certificate;
+    private String prize;
+    private String punishment;
     private String jobObjective;
 }
