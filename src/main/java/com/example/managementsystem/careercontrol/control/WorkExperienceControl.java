@@ -12,8 +12,8 @@ public class WorkExperienceControl
     private WorkExperienceService workExperienceService;
     
     // 경력 생성
-    @PostMapping("/createWorkExperience")
-    public WorkExperience createWorkExperience(@RequestParam int employeeNumber, @RequestBody WorkExperience workExperience) {
+    @PostMapping("/createWorkExperience/{employeeNumber}")
+    public WorkExperience createWorkExperience(@PathVariable int employeeNumber, @RequestBody WorkExperience workExperience) {
         return workExperienceService.createWorkExperience(employeeNumber, workExperience);
     }
     

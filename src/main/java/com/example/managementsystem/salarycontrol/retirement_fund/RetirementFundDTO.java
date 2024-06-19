@@ -1,7 +1,7 @@
-package com.example.managementsystem.salary.retirement_fund;
+package com.example.managementsystem.salarycontrol.retirement_fund;
 
-import com.example.managementsystem.global.employee.EmployeeDTO;
-import com.example.managementsystem.salary.period.PeriodDTO;
+import com.example.managementsystem.global.entity.Employee;
+import com.example.managementsystem.salarycontrol.period.PeriodDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +14,7 @@ import java.util.Date;
 public class RetirementFundDTO
 {
     private int fundID;
-    private EmployeeDTO employee;
+    private Employee employee;
     private String fundType;
     private Date startDate;
     private Date endDate;

@@ -21,30 +21,24 @@ public class WorkExperienceService
         Employee employee = employeeRepository.findByEmployeeNumber(employeeNumber)
                 .orElseThrow(() -> new IllegalArgumentException("Employee with number " + employeeNumber + " does not exist in Employee2 table"));
         
-        if (workExperienceRepository.findByEmployee_EmployeeNumber(employeeNumber).isPresent()) {
+        if (workExperienceRepository.findByEmployeeId(employeeNumber).isPresent()) {
             throw new IllegalArgumentException("Employee with number " + employeeNumber + " already exists in work_experience table");
         }
         
         checkValidate(workExperience);
-        workExperience.setEmployee(employee);
+        workExperience.setEmployeeId(employee.getEmployeeNumber());
         return workExperienceRepository.save(workExperience);
     }
     
-    // 경력 조회
+    //경력 조회
     public WorkExperience getWorkExperience(int employeeNumber) {
-        Employee employee = workExperienceRepository.findByEmployee_EmployeeNumber(employeeNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Employee with number " + employeeNumber + " does not exist")).getEmployee();
-        WorkExperience workExperience = employee.getWorkExperience();
-        if (workExperience == null) {
-            throw new IllegalArgumentException("No WorkExperience found for employee with number " + employeeNumber);
-        }
-        return workExperience;
+        return workExperienceRepository.findByEmployeeId(employeeNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Employee with number " + employeeNumber + " does not exist in work_experience table"));
     }
     
     // 유효성 검사
     private void checkValidate(WorkExperience workExperience) {
-        if (workExperience == null ||
-            workExperience.getClassification() == null ||
+        if (workExperience.getClassification() == null ||
             workExperience.getAppointment() == null ||
             workExperience.getEducation() == null ||
             workExperience.getWork() == null ||

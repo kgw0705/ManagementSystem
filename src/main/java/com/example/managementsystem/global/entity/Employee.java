@@ -1,6 +1,5 @@
 package com.example.managementsystem.global.entity;
 
-import com.example.managementsystem.careercontrol.entity.WorkExperience;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,12 +11,8 @@ import lombok.Setter;
 public class Employee
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
     private int employeeNumber;
-    @OneToOne
-    @JoinColumn(name = "work_experience_id")
-    private WorkExperience workExperience;
+    private int workExperienceId;
     private String personnelAppointmentInfo;
     private String name;
     private String position;
