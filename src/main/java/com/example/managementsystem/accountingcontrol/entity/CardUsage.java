@@ -1,6 +1,6 @@
 package com.example.managementsystem.accountingcontrol.entity;
 
-import com.example.managementsystem.global.entity.Employee;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,14 +14,12 @@ import java.time.LocalDate;
 public class CardUsage
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "card_usage_id")
-    private String cardNum;
+    private String useId;
     @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @JoinColumn(name = "cardNum")
+    @JsonBackReference
+    private ExecutionDetail executionDetail;
     private String usePlace;
     private LocalDate useDate;
     private double useCost;
-    private String useID;
 }

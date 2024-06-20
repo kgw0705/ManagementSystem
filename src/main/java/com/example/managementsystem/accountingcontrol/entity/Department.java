@@ -11,8 +11,6 @@ import lombok.Setter;
 public class Department
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int departmentId;
     private String cardNum;
     private boolean approval;
     private String departmentName;
