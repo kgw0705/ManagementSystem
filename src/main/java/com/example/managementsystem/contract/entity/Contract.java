@@ -23,7 +23,7 @@ public class Contract {
     private int contract_amount;
     private String contract_start_date;
     private String contract_end_date;
-    private boolean is_New_bid;
+    private int is_New_bid;
     private String contract_content;
 
 }
