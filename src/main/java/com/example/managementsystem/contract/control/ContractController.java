@@ -5,6 +5,8 @@ import com.example.managementsystem.contract.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 
 @RestController
 public class ContractController
@@ -20,7 +22,15 @@ public class ContractController
 
     @PostMapping("/writeContract")
     public boolean writeContract(@RequestBody Contract contract) {
-        return contractService.writeContract(contract);
+        Date startDate = contract.getContract_start_date();
+        Date endDate = contract.getContract_end_date();
+
+        if (endDate.before(startDate)) {
+            return false;
+        }
+        else {
+            return contractService.writeContract(contract);
+        }
     }
 
     @GetMapping("/inquiryContract")
